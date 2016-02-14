@@ -7,6 +7,7 @@ err <- 8
 all_keepalive <- 22204800
 lambda <-  err/all_keepalive * (HOURS * MIN * SEC/10)
 
+
 shinyServer(function(input, output) {
    
     output$zero_rate <- renderPrint({
@@ -24,4 +25,6 @@ shinyServer(function(input, output) {
         text <-  paste("for ", input$server, "servers in ", input$day, " days")
         text
     })
+    
+
 })

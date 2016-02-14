@@ -7,15 +7,18 @@ shinyUI(fluidPage(
         sliderInput("server", label = h3("Number of Servers"),
                     min = 0, max = 100, value = 50),
         sliderInput("day", label = h3("Number of Days"),
-                    min = 0, max = 356, value = 50),
+                    min = 0, max = 356, value = 50)
+    ),
+    mainPanel(
+        h3("Results:"),
+        h3("Please be patient, the result seems take some times to display"),
         textOutput("text"),
         h3("No Malfunction Rate:"),
         verbatimTextOutput("zero_rate"),
         h3("One Malfunction Rate:"),
-        verbatimTextOutput("one_rate")
-    ),
-    mainPanel(
-        h3("Server Malfunction Rate Prediction"),
+        verbatimTextOutput("one_rate"),
+        br(),
+        h3("Server Malfunction Rate Calculation Introduction"),
         p("The Debian servers installed with Open vSwtich Version 2.4.0 has some bugs 
           interconnect to the Cisco Switch configured with keepalive message.
           Every 10 second, the Cisco Switch will dispatch a keepalive message to
@@ -24,13 +27,11 @@ shinyUI(fluidPage(
         br(),
         p("The incident logs show there are 8 malfunction records in 22204800
            keepalive message received on Debian servers."),
-        br(),
         h3("Let's assuming that:"),
         p("* The keepalive message recieved on servers and malfunction events 
           are iid (independent identically-distributed)" ),
         p("* Server malfunction rate is constant, and it is proportional to 
           keepalive message events." ),
-        br(),
         h3("Then we can make prediction based on Poisson Distribution:"),
         p("zero_rate <- ppois(1, lambda*servers*days) -  dpois(1, lambda*server*day)" ),
         p("one_rate <- dpois(1, lambda*servers*days)" )
